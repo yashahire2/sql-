@@ -1,0 +1,78 @@
+create table EMPLOYEE(EMP_ID integer,EMP_NAME VARCHAR2(50),EMP_SURNAME VARCHAR2(50),salary number(10),Gender varchar(1),city VARCHAR2(50))
+
+insert into EMPLOYEE values(10,'Sumit','Pendkar',25000,'M','PUNE');
+insert into EMPLOYEE values(20,'Sandesh','Pawar',35000,'M','MUMBAI');
+insert into EMPLOYEE values(30,'Raju','Dhage',28000,'M','PUNE');
+insert into EMPLOYEE values(40,'Pooja','Dinkar',45000,'F','PUNE');
+insert into EMPLOYEE values(50,'Manish','Sharma',48000,'M','HYDERABAD');
+insert into EMPLOYEE values(60,'Tarun','Verma',51000,'M','KOLKATA');
+insert into EMPLOYEE values(70,'Akanksha','Walikar',49000,'F','INDORE');
+insert into EMPLOYEE values(80,'Anjana','Batra',46000,'F','MUMBAI');
+
+select * from 
+
+1 Find out the employee details who is earning the maximum salary
+
+select max(salary) from employee
+select * from employee where salary = (select max(salary) from employee)
+
+
+2 Find the employee name who is from Pune and earning the highest salary
+
+select max(salary) from employee where city = 'PUNE'
+select * from employee where salary = (select max(salary) from employee where city = 'PUNE')
+
+3 Find out the employee who is from MUMBAI and earning lowest salary
+
+select min(salary) from employee where city = 'MUMBAI'
+select * from employee where salary = (select min(salary) from employee where city = 'MUMBAI')
+
+4 Find the employee name and Salary whos employee id is highest.
+
+select max(EMP_ID) from employee
+select * from employee where EMP_ID = (select max(EMP_ID) from employee)
+
+5 Find the employee details who is female and having the minimum salary in MUMBAI
+
+select min(salary) from employee where gender ='F' and city = 'MUMBAI'
+select * from employee where salary = (select min(salary) from employee where gender ='F' and city = 'MUMBAI')
+
+6 Find the details of a employee who is earning the higher salary than the avarage salary
+
+select avg(salary) from employee
+select * from employee where salary > (select avg(salary) from employee) 
+
+7 Change the surname of a employee to 'TATA' who is earning the highest salary
+
+select * from employee where salary = (select max(salary) from employee)
+select EMP_ID, replace (EMP_SURNAME,'Verma','TATA') from employee
+
+
+8 Find the employee details who is earning lowest salary and remove him from the table.
+
+select * from employee where salary = (select min(salary) from employee)
+delete from employee where salary = (select min(salary) from employee)
+ 
+ 
+ 9 Find the details of a employee who is earning the below avarage salary
+
+select round(avg(salary)) from employee
+select * from employee where salary < (select round(avg(salary)) from employee)
+
+
+10 Find out the employee details who is earning second highest salary.
+
+select max(salary) from employee
+select max(salary) from employee where salary < (select max(salary) from employee)
+select * from employee where salary = (select max(salary) from employee where salary < (select max(salary) from employee))
+
+
+11 Find out the employee details who is earning the highest salary per CITY.
+
+select EMP_ID, EMP_SURNAME, SALARY, GENDER, CITY from employee group by EMP_ID
+
+
+
+
+
+
